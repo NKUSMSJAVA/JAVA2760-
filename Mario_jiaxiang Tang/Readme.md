@@ -10,8 +10,8 @@
 
 #Reference
 https://blog.csdn.net/moakun/article/details/83052501
-https://www.jb51.net/article/159474.htm
 http://www.javafxchina.net/blog/docs/
+...
 
 #about JavaFX
 recomend:
