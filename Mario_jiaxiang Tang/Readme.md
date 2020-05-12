@@ -1,10 +1,10 @@
-@Author£º
-1713653ÌÆ¼ÑÏè
+@AuthorÂ£Âº
+1713653å”ä½³ç¿”
 
 @nku math
 
 #course project
-@java 2760 »ùÓÚJavafxµÄMario
+@java 2760  Mario 
 
 #Resource from https://gitee.com/chevalierys/Simple_Mario/tree/master/marioMain/pic/
 
