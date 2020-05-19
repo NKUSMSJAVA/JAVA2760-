@@ -9,3 +9,5 @@
 [3. Mario 作者：唐佳翔 1713653 Mario based on JavaFX](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/Mario_jiaxiang%20Tang)   
 
 [4. Calculator 作者：谢宇辉 1710089](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/calculator_xyh)
+
+[5. Snake 作者：丁世瑞 1710022](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/Snake_Shirui%20Ding)
