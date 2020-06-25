@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane focusTraversable="true" onKeyPressed="#handleKeyPressed" prefHeight="644.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <Pane fx:id="worldPane" focusTraversable="true" onMouseClicked="#worldPaneClicked" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="644.0" fitWidth="432.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/background.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="birdImageView" fitHeight="40.0" fitWidth="40.0" layoutX="102.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/bird0.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="columnImageView1" fitHeight="1200.0" fitWidth="78.0" layoutX="278.0" layoutY="-282.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../image/column.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="columnImageView2" fitHeight="1200.0" fitWidth="78.0" layoutX="78.0" layoutY="-349.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../image/column.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="groundImageView" fitHeight="149.0" fitWidth="809.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/ground.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="scoreLabel" text="Score: 0" textFill="WHITE">
+               <font>
+                  <Font name="Futura Bold" size="19.0" />
+               </font></Label>
+            <ImageView fx:id="startImageView" fitHeight="478.0" fitWidth="398.0" layoutX="55.0" layoutY="79.0" onMouseClicked="#startClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/start.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="restartImageView" disable="true" fitHeight="435.0" fitWidth="315.0" layoutX="60.0" layoutY="104.0" onMouseClicked="#restartClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../image/gameover.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
