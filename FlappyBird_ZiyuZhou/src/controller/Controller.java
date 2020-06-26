@@ -103,7 +103,6 @@ public class Controller implements Runnable{
     		columnImageView2.setLayoutY(column2.getColumnY());
     		
     		groundImageView.setLayoutX(ground.getGroundX());
-    		groundImageView.setLayoutY(Ground.GROUNDY);
     		
     		Platform.runLater(new Runnable() {
     		    @Override
@@ -124,6 +123,7 @@ public class Controller implements Runnable{
     	column2 = new Column(2);
     	ground = new Ground(); 
     	startImageView.setPickOnBounds(true);
+		groundImageView.setLayoutY(Ground.GROUNDY);
     }
     
 	@Override
@@ -149,9 +149,7 @@ public class Controller implements Runnable{
 			columnImageView2.setLayoutY(column2.getColumnY());
 			
 			ground.step();
-			groundImageView.setLayoutX(ground.getGroundX());
-			groundImageView.setLayoutY(Ground.GROUNDY);
-			
+			groundImageView.setLayoutX(ground.getGroundX());			
 			
 			if(bird.hit(column1) || bird.hit(column2)) {
 				System.out.println("hit"); 

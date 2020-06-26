@@ -46,7 +46,7 @@ public class Bird {
 		double s = - v0*T + 0.5*G*T*T;
 		birdY = birdY + (int)s; 
 		birdAngle = s*5;
-//		System.out.println(s);
+
 	}
 	
 	public void flappy(){
@@ -65,14 +65,12 @@ public class Bird {
 		if (birdY + BIRDHEIGHT > Ground.GROUNDY)
 			return true;
 		
-		if (BIRDX + BIRDWIDTH > columnX && BIRDX < columnX ) {
-			if(birdY < columnY + Column.COLUMNHEIGHT || birdY > columnY + Column.COLUMNHEIGHT + Column.GAP) {
+		if (BIRDX + BIRDWIDTH - 4 > columnX && BIRDX < columnX + Column.COLUMNWIDTH ) {
+			if(birdY < columnY + Column.COLUMNHEIGHT - 4 || birdY + BIRDHEIGHT - 4 > columnY + Column.COLUMNHEIGHT + Column.GAP) {
 				return true;
 			}
 		}
-		   
 		return false;
-		
 	}
 	
 	public boolean pass(Column column) {
@@ -90,7 +88,5 @@ public class Bird {
 	public void reSetBirdY() {
 		birdY = 224;
 		speed = V0;
-
 	}
-
 }
