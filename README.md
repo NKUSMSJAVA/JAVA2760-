@@ -14,6 +14,8 @@
 
 [6. Flappy Bird 作者：周姿妤 1810658](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/FlappyBird_ZiyuZhou)
 
+[7. MyDL 作者：吕之豪 1810064 王琦 1710476](https://github.com/Alexhaoge/MyDL)
+
 ## 大作业提交方式
 班内所有非毕业年级同学请通过如下集中方式提交，毕业年级同学如想提交也可以，谢绝非本班同学提交。
 ### 如果你有Github账号
