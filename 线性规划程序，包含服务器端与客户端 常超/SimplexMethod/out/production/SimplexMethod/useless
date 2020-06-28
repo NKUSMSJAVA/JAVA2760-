@@ -1,0 +1,366 @@
+//一次性解决无约束部分，化为标准型部分
+        int rowNum=1+2*n1+n2;
+        int volNum=m+nlength+2*n1+n2+1;
+        Integer[][] bigMatrix=new Integer[rowNum][volNum];
+        //bigMatrix就是单纯形表了，待填充
+        //先填充左上角
+        for(int j=0;j<m;++j){
+            bigMatrix[0][j]=c[0][j];
+            for(int i=1;i<1+n1;++i){
+                bigMatrix[i][j]=Aeq[i-1][j];
+                bigMatrix[i+n1][j]=-Aeq[i-1][j];
+            }
+            for(int i=1;i<n2+1;++i){
+                bigMatrix[i+2*n1][j]=Aleq[i-1][j];
+            }
+        }
+        for(int j=0;j<nlength;++j){
+            bigMatrix[0][m+j]=-c[0][nindex[0][j]-1];
+            for(int i=1;i<1+2*n1;++i){
+                bigMatrix[i][m+j]=-bigMatrix[i][nindex[0][j]-1];
+            }
+            for(int i=1;i<n2+1;++i){
+                bigMatrix[i+2*n1][m+j]=-bigMatrix[i+2*n1][nindex[0][j]-1];
+            }
+        }
+        for(int j=m+nlength;j<volNum;++j){
+            bigMatrix[0][j]=0;
+        }
+        //填充B
+        for(int i=0;i<2*n1+n2;++i){
+            for(int j=0;j<2*n1+n2;++j){
+                if(i==j) {
+                    bigMatrix[1 + i][m + nlength + j] = 1;
+                }
+                else{
+                    bigMatrix[1 + i][m + nlength + j] = 0;
+                }
+
+            }
+        }
+        //填充B^(-1)*b
+        for(int i=0;i<n1;++i){
+            bigMatrix[i+1][volNum-1]=beq[i][0];
+            bigMatrix[i+n1+1][volNum-1]=-beq[i][0];
+        }
+        for(int i=0;i<n2;++i){
+            bigMatrix[i+1+2*n1][volNum-1]=bleq[i][0];
+        }
+        //填充第二行到第2*n1+1行
+
+        //这里是debug输入模式
+        //这里是检查每个的情况
+        MyUtil.printMatrixDug(c);
+        if(n1!=0) {
+            System.out.println("Aeq:");
+            MyUtil.printMatrixDug(Aeq);
+            System.out.println("beq:");
+            MyUtil.printMatrixDug(beq);
+        }
+        if(Aleq.length!=0) {
+            System.out.println("Aleq:");
+            MyUtil.printMatrixDug(Aleq);
+            System.out.println("bleq:");
+            MyUtil.printMatrixDug(bleq);
+        }
+        if(lindex.length!=0) {
+            System.out.println("lindex:");
+            MyUtil.printMatrixDug(lindex);
+        }
+        if(nindex.length!=0) {
+            System.out.println("nindex:");
+            MyUtil.printMatrixDug(nindex);
+        }
+        System.out.println("单纯形表为：");
+        MyUtil.printMatrixDug(bigMatrix);
+
+        //定义初始单纯形表中基指标
+        Integer[] I_B=new Integer[2*n1+n2];
+        for(int i=0;i<2*n1+n2;++i){
+            I_B[i]=m+nlength+i+1;
+        }
+        for(int i=0;i<I_B.length;++i){
+            System.out.print(I_B[i]+" ");
+        }
+        System.out.print("\n");
+        //将单纯形表转化为分数格式
+        Fraction[][] fBigMatrix=new Fraction[rowNum][volNum];
+        for(int i=0;i<rowNum;++i){
+            for(int j=0;j<volNum;++j){
+                fBigMatrix[i][j]=MyUtil.IntegerToFraction(bigMatrix[i][j]);
+            }
+        }
+        //包装成矩阵
+        Matrix simplexMatrix=new Matrix(fBigMatrix);
+        simplexMatrix.printMatrix();
+
+        System.out.println("k="+MyUtil.findSmallestValueInDeltaIndex(simplexMatrix));
+        //System.exit(2);
+        while(!MyUtil.deltaIsBiggerThanZero(simplexMatrix)){
+            int k=MyUtil.findSmallestValueInDeltaIndex(simplexMatrix);
+            Vector<Integer> searchI_rVec=new Vector<Integer>();
+            for(int i=1;i<rowNum;++i){
+                if(simplexMatrix.fractions[i][k-1].isBiggerThanZero()){
+                    searchI_rVec.add(i);
+                }
+            }
+            if(searchI_rVec.size()==0){
+                System.out.println("该线性规划问题无解！");
+                System.exit(0);
+            }
+            Fraction[][] divInI_r=new Fraction[1][searchI_rVec.size()+1];
+            divInI_r[0][searchI_rVec.size()]=new Fraction(1,Integer.MAX_VALUE/2);
+            for(int i=0;i<searchI_rVec.size();++i){
+                divInI_r[0][i]=Fraction.div(simplexMatrix.fractions[searchI_rVec.get(i)][volNum-1],simplexMatrix.fractions[searchI_rVec.get(i)][k-1]);
+            }
+            //System.out.println(MyUtil.findSmallestValueInDeltaIndex(new Matrix(divInI_r)));
+            Integer i_r=I_B[searchI_rVec.get(MyUtil.findSmallestValueInDeltaIndex(new Matrix(divInI_r))-1)-1];
+            System.out.println("i_r="+i_r);
+            simplexMatrix=MyUtil.GaussianElimination(simplexMatrix,MyUtil.findIndexInArray(I_B,i_r)+1,k);
+            I_B[MyUtil.findIndexInArray(I_B,i_r)-1]=k;
+            System.out.println("单纯形表：");
+            simplexMatrix.printMatrix();
+            System.out.print("I_B:");
+            for(int i=0;i<I_B.length;++i){
+                System.out.print(I_B[i]+" ");
+            }
+            System.out.print("\n");
+        }
+         * 我们把它们都处理成小于的情况。变量都大于0约束
+                 * 处理办法：等于的部分可以转化为>=与<=两个式子联立。
+                 *          大于不等式可以一行系数都乘以-1变成小于等于
+                 *          无约束部分可以变为一个正数减去另一个正数
+                 *          这些处理办法的思想都来自于对偶问题的证明过程
+                 * 在此我们将它转化为Aeq，b，c的形式，每个变量都有大于等于0约束
+                 * 我们再对此做出处理变为标准型，取最后几列作为基矩阵B，剩余的作为非基矩阵N，同时建立I_B,I_N两个数组来储存它们的指标。
+                 * 这里开始的B一定是单位矩阵，B^(-1)*A与B^(-1)*b都和原来一致，这样连求逆都不用了。即使求逆我们也有复杂度很好的mriv方法。
+                 * 这样再构造单纯形表，用I_B和I_N不断记录基指标与非基指标。由于c_B是我们构造出来的，它们都是0，因此初始的delta就是处理后的
+                 * c。接下来判断大于0，查找delta中最小的分量，查找该分量对应的列与B^(-1)b对应的商最小的行指标，得到对应的基指标，与之前的非
+                 * 基指标交换，并做高斯消元（GaussianElimination函数），不断循环判断delta是否大于0.当然，如果所有对应的B^(-1)a_k都小于0，
+                 * 就结束并输出无解。如果delta>=0，就把基指标对应的基本可行解写出来。
+                 *
+                 * 具体处理：1.输入初始的c[1][m],Aeq[n1][m],Aleq[n2][m],beq[n1][1],bleq[n2][1]
+                 *          2.小于0的指标输入集合lindex{}，将Aeq与Aleq中对应的Aeq[][i-1]修改为负数。
+                 *          3.无约束nindex{}：每有一个指标需要将m加一构造新的Aeq与Aleq，可以判断有几个无约束的指标，只做一遍构造处理，在多出来的几
+                 *             列里填充-Aeq[i][j]，其中j为对应的无约束变量的指标-1，i包括每一行，Aleq同理。c也重新构造，在对应的位置填充
+                 *             -c[j]
+                 *          4.得到了新的Aeq,Aleq,c.这时约束都大于等于0.开始将Aeq转换为Aleq的部分，需要重新构造Aleq。构造Aleq[2*n1+n2][m],
+                 *            构造bleq[2*n1+n2][1],进行填充。
+                 *          5.构造N[2*n1+n2][m],B为B[m][m]的单位矩阵，A=[N B]，I_B={2*n1+n2+1:2*n1+n2+m},I_N={1:2*n1+n2}，
+                 *             delta[2*n1+n2+m][1]为c添加上m个0构造而成。判断delta是否大于等于0.是则直接将B^(-1)b输出
+                 *          6.若有小于0的分量，找到最小的对应的指标k，在A[][k-1]中寻找第i_r行，需要满足A[i_r-1][k-1]>0,若不存在，直接返回
+                 *            没有可行解
+                 *          7.用A[i_r_1][k-1]高斯消元。事实上我们在第五步时构造了一个bigMatrix，它的第一行是c加上一个0，其余每一行是A和b
+                 *            的每一行。bigMatrix格式为bigMatrix[2*n1+n2+1][m+1]，消元函数参数为（bigMatrix，i_r+1,k)。消完后得到了
+                 *            新的bigMatrix，读取第一行，判断除去最后一个的其余是否大于0，大于0输出bigMatrix最后一列除去第一行，结合I_B
+                 *            输出可行解。否则重复第6步。
+                 *          8.当输出结果后转换，无约束指标的用nindex[i]-nindex[i+n1],lindex的直接变为负的。得到原问题的解。
+                 *          9.结合原来的c计算出极小值。
+                 *
+                 */
+         //        Fraction a=new Fraction(3,2);
+         //        Fraction b=new Fraction(2,1);
+         //        System.out.print("a is:");
+         //        a.printFraction();
+         //        System.out.print("\n"+"b is:");
+         //        b.printFraction();
+         //        Fraction c=Fraction.multi(a,b);
+         //        System.out.print("\nthe result is:");
+         //        c.printFraction();
+          /*Scanner scanner=new Scanner("\u202AF:\\test111.txt");
+                 //这里是debug高斯消元工具
+                 int m=scanner.nextInt();
+                 int n=scanner.nextInt();
+                 Fraction test[][]=new Fraction[m][n];
+                 for(int i=0;i<m;i++){
+                     for(int j=0;j<n;j++){
+                         test[i][j]=new Fraction(1,scanner.nextInt());
+                     }
+                 }
+                 int ir=scanner.nextInt();
+                 int k=scanner.nextInt();
+                 scanner.close();*/
+                 /**
+                  * 在测试程序时，遇到了java.util.NoSuchElementException，发现原因是程序中的Scanner使用
+                  * 的System.in这个System类**静态变量**InputStream（这点倒是一直忽视了）导致的。
+                  * 这里的解决办法是以scanner为参数传入，使用完后关闭
+                  * 事实上在构造函数中直接不关闭也行，函数结束后scanner生存期就结束了，起到了关闭的作用
+                  */
+                 //Scanner scanner=new Scanner(System.in);
+                 /*Matrix matrix1=new Matrix();
+                 matrix1.printMatrix();
+                 Matrix matrix2=new Matrix();
+                 matrix2.printMatrix();
+                 matrix1=MyUtil.multi(matrix1,matrix2);
+                 matrix1.printMatrix();*/
+                 //scanner.close();
+
+          /*
+                  Scanner sc=new Scanner(System.in);
+                  System.out.println("------------------------------------------------------------------------------");
+                  System.out.println("输入对应的数字即可进行对应项目的输入。输入默认为矩阵形式，需要先输入矩阵的行数和列数，再输入矩阵。");
+                  System.out.println("矩阵输入格式任意，只要输入足量整数即可。当然，想输入分数，请升级为VIP，即可享受该服务与1KB/s高速");
+                  System.out.println("数据传输。百度网盘，想你所想！若是偷跑，pandownload就是下场！");
+                  int choice=0;
+                  Integer c[][]=null;
+                  Integer Aeq[][]=new Integer[0][0];
+                  Integer beq[][]=new Integer[0][0];
+                  Integer Aleq[][]=new Integer[0][0];
+                  Integer bleq[][]=new Integer[0][0];
+                  Integer lindex[][]=new Integer[0][0];
+                  Integer nindex[][]=new Integer[0][0];
+                  //这里全部填写，方便debug
+                  //c= new Integer[][]{{-5, -2, -8}};
+                  //Aeq= new Integer[][]{{2, 5, 6, 3}, {5, 8, 3, 2}, {3, 7, 3, 6}, {3, 5, 4, 2}};
+                  //beq= new Integer[][]{{3}, {4}, {7}, {3}};
+                  //Aleq= new Integer[][]{{2,-4,1}, {2, 3, -1},{6,-1,3}};
+                  //bleq= new Integer[][]{{42}, {42},{42}};
+                  //lindex= new Integer[][]{{1}};
+                  //nindex= new Integer[][]{{2, 3}};
+
+                  while (choice!=-1) {
+                      System.out.print("请输入项目:");
+                      if (choice==0) {
+                          System.out.print("\n");
+                          System.out.println("1.c，即需要极小化的系数");
+                          System.out.println("2.Aeq，即等于等式约束部分的系数矩阵");
+                          System.out.println("3.beq，即等式约束部分的约束结果");
+                          System.out.println("4.Aleq，即不等式部分小于的系数矩阵");
+                          System.out.println("5.bleq，不等式小于的约束结果");
+                          System.out.println("6.小于等于0变量指标集");
+                          System.out.println("7.无约束指标集");
+                          System.out.println("0:调出菜单");
+                          System.out.println("-1:退出输入");
+                          System.out.print("请输入项目:");
+                      }
+                      choice=sc.nextInt();
+                      if(choice==-1){
+                          break;
+                      }
+                      if(choice==0){
+                          continue;
+                      }
+                      System.out.print("输入待输入对象的行数和列数");
+                      int rowNumber;
+                      int volNumber;
+                      rowNumber=sc.nextInt();
+                      volNumber=sc.nextInt();
+                      switch (choice){
+                          case 1:
+                              System.out.print("c["+rowNumber+"]["+volNumber+"]:");
+                              c=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      c[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+
+                          case 2:
+                              System.out.print("Aeq["+rowNumber+"]["+volNumber+"]:");
+                              Aeq=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      Aeq[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                          case 3:
+                              System.out.print("beq["+rowNumber+"]["+volNumber+"]:");
+                              beq=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      beq[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                          case 4:
+                              System.out.print("Aleq["+rowNumber+"]["+volNumber+"]:");
+                              Aleq=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      Aleq[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                          case 5:
+                              System.out.print("bleq["+rowNumber+"]["+volNumber+"]:");
+                              bleq=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      bleq[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                          case 6:
+                              System.out.print("lindex["+rowNumber+"]["+volNumber+"]:");
+                              lindex=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      lindex[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                          case 7:
+                              System.out.print("nindex["+rowNumber+"]["+volNumber+"]:");
+                              nindex=new Integer[rowNumber][volNumber];
+                              for(int i=0;i<rowNumber;++i){
+                                  for(int j=0;j<volNumber;++j){
+                                      nindex[i][j]=sc.nextInt();
+                                  }
+                              }
+                              break;
+                      }
+                      System.out.println("输入完毕！");
+                  }
+                  sc.close();
+
+                  //别想输入了，System.in都被我关了。
+                  if(c==null||((Aeq==null||beq==null)&&(Aleq==null||bleq==null))){
+                      System.out.print("wrong input!");
+                      System.exit(1);
+                  }
+
+                  //处理负约束条件
+                  int n1=Aeq.length;
+                  int n2=Aleq.length;
+                  int m;
+                  if(n1==0){
+                      m=Aleq[0].length;
+                  }
+                  else{
+                      m=Aeq[0].length;
+                  }
+                  int nlength=0;
+                  if (lindex.length!=0) {
+                      int llength=lindex[0].length;
+                      for(int i=0;i<llength;++i){
+                          for(int j=0;j<n1;++j){
+                              Aeq[j][lindex[0][i]-1]*=-1;
+                          }
+                          for(int j=0;j<n2;++j){
+                              Aleq[j][lindex[0][i]-1]*=-1;
+                          }
+                          c[0][lindex[0][i]-1]*=-1;
+                      }
+                  }
+                  if(nindex.length!=0){
+                      nlength=nindex[0].length;
+                  }
+                  else{
+                      nlength=0;
+                  }
+          */
+          /*out.println("1.c，即需要极小化的系数");
+                      out.println("2.Aeq，即等于等式约束部分的系数矩阵");
+                      out.println("3.beq，即等式约束部分的约束结果");
+                      out.println("4.Aleq，即不等式部分小于的系数矩阵");
+                      out.println("5.bleq，不等式小于的约束结果");
+                      out.println("6.小于等于0变量指标集");
+                      out.println("7.无约束指标集");
+                      out.println("0:调出菜单");
+                      out.println("-1:退出输入");
+                      out.println("输入对应的数字即可进行对应项目的输入。输入默认为矩阵形式，需要先输入矩阵的行数和列数，再输入矩阵。");
+                      out.println("矩阵输入格式任意，只要输入足量整数即可。当然，想输入分数，请升级为VIP，即可享受该服务与1KB/s高速");
+                      out.println("数据传输。白度客户端，想你所想！若是“侵犯客户隐私”，banpownload引以为戒！");
+                      */

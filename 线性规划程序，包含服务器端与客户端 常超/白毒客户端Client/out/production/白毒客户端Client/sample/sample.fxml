@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="313.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="文件">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="登录" />
+                  <MenuItem mnemonicParsing="false" text="首选项" />
+                  <MenuItem mnemonicParsing="false" text="小语种学习资料" />
+              <MenuItem mnemonicParsing="false" text="关闭" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="编辑">
+            <items>
+              <MenuItem mnemonicParsing="false" text="撤销" />
+                  <MenuItem mnemonicParsing="false" text="重做" />
+                  <MenuItem mnemonicParsing="false" text="复制" />
+                  <MenuItem mnemonicParsing="false" text="粘贴" />
+                  <MenuItem mnemonicParsing="false" text="全选" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="VIP充值">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="用户">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="用户身份" />
+                  <MenuItem mnemonicParsing="false" text="查看用户信息" />
+                  <MenuItem mnemonicParsing="false" text="智商检验器" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="充钱地址">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="支付宝" />
+                  <MenuItem mnemonicParsing="false" text="微信" />
+                  <MenuItem mnemonicParsing="false" text="很行" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="帮助">
+            <items>
+              <MenuItem mnemonicParsing="false" text="关于我们" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.29797979797979796" layoutY="27.0" prefHeight="574.0" prefWidth="800.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="175.0">
+               <children>
+                  <Button fx:id="computeHit" layoutX="145.0" layoutY="27.0" mnemonicParsing="false" onKeyTyped="#onComputeButtonKeyboard" onMouseClicked="#onHitComputeButton" text="Compute" />
+                  <Label layoutX="-1.0" layoutY="7.0" prefHeight="27.0" prefWidth="46.0" text="输入" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextFlow layoutX="44.0" layoutY="50.0" prefHeight="522.0" prefWidth="188.0">
+                     <children>
+                        <TextArea fx:id="textCNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textc" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textAeqNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textAeq" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textbeqNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textbeq" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textAleqNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textAleq" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textbleqNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textbleq" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textlindexNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textlindex" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textnindexNum" prefHeight="28.0" prefWidth="186.0" />
+                        <TextArea fx:id="textnindex" prefHeight="28.0" prefWidth="186.0" />
+                     </children>
+                  </TextFlow>
+                  <Label layoutX="3.0" layoutY="64.0" prefWidth="38.0" text="c Num" />
+                  <Label layoutX="7.0" layoutY="93.0" text="c[]" />
+                  <Label layoutX="3.0" layoutY="133.0" text="AeqNum">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="169.0" text="Aeq" />
+                  <Label layoutX="3.0" layoutY="205.0" text="beqNum">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="245.0" text="beq" />
+                  <Label layoutX="7.0" layoutY="279.0" text="AleqNum" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="311.0" text="Aleq" />
+                  <Label layoutX="7.0" layoutY="357.0" text="bleqNum" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="385.0" text="bleq" />
+                  <Label layoutY="425.0" text="lindexNum" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="465.0" text="lindex" />
+                  <Label layoutX="7.0" layoutY="501.0" text="nindexNum" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="533.0" text="nindex" AnchorPane.leftAnchor="3.0" />
+                  <Button fx:id="InputEndButton" layoutX="46.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#onHitInputEndButtion" text="InputEnd" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="413.0">
+               <children>
+                  <Label layoutX="-1.0" layoutY="7.0" text="输出" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="33.0" prefHeight="27.0" prefWidth="411.0" text="用户须知：" />
+                  <Label fx:id="output" layoutX="17.0" layoutY="221.0" prefHeight="195.0" prefWidth="469.0" text="解" />
+                  <Label layoutX="20.0" layoutY="60.0" text="c，即需要极小化的系数" />
+                  <Label layoutX="20.0" layoutY="75.0" text="Aeq，即等于等式约束部分的系数矩阵" />
+                  <Label layoutX="20.0" layoutY="90.0" text="beq，即等式约束部分的约束结果" />
+                  <Label layoutX="20.0" layoutY="105.0" text="Aleq，即不等式部分小于的系数矩阵" />
+                  <Label layoutX="20.0" layoutY="120.0" text="bleq，不等式小于的约束结果" />
+                  <Label layoutX="20.0" layoutY="135.0" text="lindex，未知量小于0的约束下标" />
+                  <Label layoutX="20.0" layoutY="150.0" text="nindex，未知量无约束的下标" />
+                  <Label layoutX="20.0" layoutY="165.0" text="在输入每个项目前需要先输入它们作为矩阵的规模，之后输入符合规模数量的整数即可，空格分隔" />
+                  <Label layoutX="20.0" layoutY="206.0" text="不包括lindex的标准型解为：" />
+                  <Label layoutX="20.0" layoutY="180.0" text="默认值删除的确不方便，建议使用ctrl+shift+左箭头来选中后输入，不想写文本域鼠标事件了" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
