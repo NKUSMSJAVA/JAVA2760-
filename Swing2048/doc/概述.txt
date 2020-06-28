@@ -1,15 +1,16 @@
-java.awtºÍjavx.swing»æÖÆ´°Ìå
-java.awt.eventÊÂ¼þ
-java.util.Random°üËæ»úÉú³ÉÒ»¸öÊý
-ÓÎÏ·ÖÐ2ºÍ4ÊÇËæ»úÉú³ÉµÄ£¬ÐÂÊý×Ö¿é³öÏÖµÄÎ»ÖÃÒ²ÊÇËæ»úµÄ
+éƒ‘å¿±åŽŸ 1710128
+java.awtå’Œjavx.swingç»˜åˆ¶çª—ä½“
+java.awt.eventäº‹ä»¶
+java.util.RandomåŒ…éšæœºç”Ÿæˆä¸€ä¸ªæ•°
+æ¸¸æˆä¸­2å’Œ4æ˜¯éšæœºç”Ÿæˆçš„ï¼Œæ–°æ•°å­—å—å‡ºçŽ°çš„ä½ç½®ä¹Ÿæ˜¯éšæœºçš„
 
 
-Ã¿¸ö¸ñµã¶ÔÓ¦Êý×éÖÐÒ»¸öÊý×Ö
+æ¯ä¸ªæ ¼ç‚¹å¯¹åº”æ•°ç»„ä¸­ä¸€ä¸ªæ•°å­—
    0  1  2  3
 0  0  1  2  3
 1  4  5  6  7
 2  8  9  10 11
 3  12 13 14 15
 
-×ó¡¢ÉÏÒÆ¶¯£¬´Ó0¿ªÊ¼±éÀú
-ÓÒ¡¢ÏÂÒÆ¶¯£¬´Ó15¿ªÊ¼±éÀú
+å·¦ã€ä¸Šç§»åŠ¨ï¼Œä»Ž0å¼€å§‹éåŽ†
+å³ã€ä¸‹ç§»åŠ¨ï¼Œä»Ž15å¼€å§‹éåŽ†
