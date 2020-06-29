@@ -16,7 +16,9 @@
 
 [7. MyDL 作者：吕之豪 1810064 王琦 1710476](https://github.com/Alexhaoge/MyDL)
 
-[8. 前后端分离的线性规划程序 作者：常超1710006](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%8C%85%E5%90%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E5%B8%B8%E8%B6%85)
+[8. 前后端分离的线性规划程序 作者：常超 1710006](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%8C%85%E5%90%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E5%B8%B8%E8%B6%85)
+
+[9. Swing2048 作者：郑忱原 1710182](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/Swing2048)
 
 ## 大作业提交方式
 班内所有非毕业年级同学请通过如下集中方式提交，毕业年级同学如想提交也可以，谢绝非本班同学提交。
