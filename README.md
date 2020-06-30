@@ -20,6 +20,8 @@
 
 [9. Swing2048 作者：郑忱原 1710182](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/Swing2048)
 
+[10. 音乐播放器 作者：江志刚 1710038](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/%E6%B1%9F%E5%BF%97%E5%88%9A1710038)
+
 ## 大作业提交方式
 班内所有非毕业年级同学请通过如下集中方式提交，毕业年级同学如想提交也可以，谢绝非本班同学提交。
 ### 如果你有Github账号
