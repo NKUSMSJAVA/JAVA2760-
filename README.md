@@ -24,6 +24,8 @@
 
 [11. 马里奥大冒险 作者：谢青洪 1810108](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/MarioAdventure_%E8%B0%A2%E9%9D%92%E6%B4%AA)
 
+[12. 安卓版计算器 作者：崔啸 1710019](https://github.com/NKUSMSJAVA2760/JAVA2760-/tree/master/Calculator%20%E5%B4%94%E5%95%B8%201710019)
+
 ## 大作业提交方式
 班内所有非毕业年级同学请通过如下集中方式提交，毕业年级同学如想提交也可以，谢绝非本班同学提交。
 ### 如果你有Github账号
